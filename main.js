@@ -17,9 +17,12 @@ function Konyvek(cim,szerzo,kiadasi_ev,oldalszam){
 const konyv1 = new Konyvek("A Gyűrűk ura", "J.R.R. Tolkien", 1952,600)
 const konyv2 = new Konyvek("Sherlock Holmes", "Arthur Conan Doyle", 1889,300)
 const konyv3 = new Konyvek("Az éjszakai szolgálat", "John La Carré", 1998,400)
+const konyv4 = new Konyvek("A Hobbit", "J.R.R. Tolkien", 1930,350)
+const konyv5 = new Konyvek("Az Aranyember", "Jókai Mór", 1878,700)
 
 
-const konyv = [konyv1,konyv2,konyv3]
+
+const konyv = [konyv1,konyv2,konyv3,konyv4,konyv5]
 
 
 
@@ -157,7 +160,10 @@ document.getElementById("szuresGomb").addEventListener("click", function(){
                         </td>
             </tr>
             ` 
-          }  
+          } 
+          else{
+            tablazatfeltoltese()
+          }
           
             }).join("");
 })
@@ -166,9 +172,14 @@ document.getElementById("szuresGomb").addEventListener("click", function(){
 
 document.getElementById("legregebbi").addEventListener("click", function(){
   
-
+     document.getElementById("legregebbiKi").innerText="Legrégebbi könyv: "
     const a = Math.min(...konyv.map(k=>k.Kiadas))
-    document.getElementById("legregebbiKi").innerHTML+=a
+    konyv.forEach(konyv => {
+        if(a==konyv.Kiadas){
+            return  document.getElementById("legregebbiKi").innerHTML+=konyv.Cim
+        }
+    });
+    
 })
 
 
@@ -177,11 +188,16 @@ document.getElementById("legregebbi").addEventListener("click", function(){
 
 document.getElementById("legvastagabb").addEventListener("click", function(){
     
+    document.getElementById("legvastagabbKi").innerText="Legvastagabb könyv: "
+        
+    const a = Math.max(...konyv.map(k => k.Oldalszam));
+      konyv.forEach(konyv => {
+        if(a==konyv.Oldalszam){
+            return  document.getElementById("legvastagabbKi").innerHTML+=konyv.Cim
+        }
+    });
     
-        const a = Math.max(...konyv.map(k => k.Oldalszam));
-      
     
-    document.getElementById("legvastagabbKi").innerHTML+=a
 })
 
 
@@ -189,10 +205,12 @@ document.getElementById("legvastagabb").addEventListener("click", function(){
 document.getElementById("atlag").addEventListener("click", function(){
     let atlag=0;
     let osszeg=0;
+    document.getElementById("atlagKi").innerText="Átlagos oldalszám: "
+    konyv.map(k => {osszeg+=Number(k.Oldalszam)});
+    console.log(Number(osszeg))
 
-    for(let i=0;i<konyv.length;i++){
-        osszeg+=konyv[i].Oldalszam
-        atlag=osszeg/konyv.length
-    }
+    atlag=osszeg/konyv.length
+    
     document.getElementById("atlagKi").innerHTML+=Math.round(atlag,2)
+    
 })
