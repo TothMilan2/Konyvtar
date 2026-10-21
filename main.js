@@ -37,11 +37,11 @@ function tablazatfeltoltese(){
                         <td class="szerzoKi">${konyv.Szerzo}</td>
                         <td class="kiadasKi">${konyv.Kiadas}</td>
                         <td class="oldalKi">${konyv.Oldalszam}</td>
-                        <td class="kolcsonzesBtn" data-index="${index}">
-                            <button>Kölcsönzés</button>
+                        <td class="kolcsonzesBtn " data-index="${index}">
+                            <button class="btn btn-primary">Kölcsönzés</button>
                         </td>
                         <td class="visszahozasBtn" data-index="${index}">
-                            <button>Visszahozás</button>
+                            <button class="btn btn-warning">Visszahozás</button>
                         </td>
             </tr>
             ` 
@@ -81,13 +81,18 @@ document.getElementById("KonyvHozzaadasa").addEventListener('click', function(){
 
 document.getElementById("tablazat").addEventListener("click", function(event){
      let gomb = event.target.closest(".kolcsonzesBtn")
-       let index = Number(gomb.dataset.index)
+
+        if (!gomb) return
+
+        const index = Number(gomb.dataset.index)
+       
        let kivalasztott = konyv[index];
 
         if(kivalasztott.kolcsonozve===false){
             kivalasztott.kolcsonoz()
-            console.log(kivalasztott)
-            alert("Kölcsönözve")     
+            
+            alert("Kölcsönözve")   
+            
         }
         else{
             alert("Nem lehet kölcsönözni")
@@ -104,7 +109,11 @@ document.getElementById("tablazat").addEventListener("click", function(event){
 
 document.getElementById("tablazat").addEventListener("click", function(event){
     let gomb = event.target.closest(".visszahozasBtn")
-       let index = Number(gomb.dataset.index)
+    if (!gomb) return
+
+        const index = Number(gomb.dataset.index)
+
+        
        let kivalasztott = konyv[index];
 
      
@@ -141,10 +150,10 @@ document.getElementById("szuresGomb").addEventListener("click", function(){
                         <td class="kiadasKi">${konyv.Kiadas}</td>
                         <td class="oldalKi">${konyv.Oldalszam}</td>
                         <td class="kolcsonzesBtn">
-                            <button>Kölcsönzés</button>
+                            <button class="btn btn-primary">Kölcsönzés</button>
                         </td>
                         <td class="visszahozasBtn" >
-                            <button>Visszahozás</button>
+                            <button class="btn btn-warning">Visszahozás</button>
                         </td>
             </tr>
             ` 
@@ -156,16 +165,9 @@ document.getElementById("szuresGomb").addEventListener("click", function(){
 
 
 document.getElementById("legregebbi").addEventListener("click", function(){
-    let a =0;
-    for(let i=0;i<konyv.length;i++){
-        
-        konyv.forEach(konyv => {
-            a = Math.min(konyv.Kiadas)
-            
-            
-        });
-        
-    }
+  
+
+    const a = Math.min(...konyv.map(k=>k.Kiadas))
     document.getElementById("legregebbiKi").innerHTML+=a
 })
 
@@ -174,14 +176,11 @@ document.getElementById("legregebbi").addEventListener("click", function(){
 
 
 document.getElementById("legvastagabb").addEventListener("click", function(){
-    let a = 0;
-    for(let i=0;i<konyv.length;i++){
-        
-        konyv.forEach(konyv=>{
-            a = Math.min(konyv.Oldalszam)
-        })
-        
-    }
+    
+    
+        const a = Math.max(...konyv.map(k => k.Oldalszam));
+      
+    
     document.getElementById("legvastagabbKi").innerHTML+=a
 })
 
