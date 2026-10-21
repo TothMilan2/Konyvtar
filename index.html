@@ -4,18 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Könyvtár</title>
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <div>
+    <div class="container">
+        <div>
         <h2>Könyv hozzáadása</h2>
-        <input id="konyvCime" >
-        <input id="konyvSzerzoje">
-        <input id="kiadasi_ev">
-        <input id="oldalszam">
+        <input id="konyvCime" placeholder="Cím">
+        <input id="konyvSzerzoje" placeholder="Szerző">
+        <input id="kiadasi_ev" placeholder="Kiadási év">
+        <input id="oldalszam" placeholder="Oldalszám">
         <button id="KonyvHozzaadasa">Könyv Hozzáadása</button>
+        
     </div>
     <div>
-        <table>
+        <button id="szuresGomb">Szűrés</button>
+        <button id="legregebbi">Legrégebbi könyv</button>
+        <button id="legvastagabb">Legvastagabb könyv</button>
+        <button id="atlag">Átlagos oldalszám</button>
+    </div>
+    <div>
+        <table id="table">
             
             <thead>
                <td>Cím</td>
@@ -31,6 +40,9 @@
         </table>
         <!-- <button id="kolcsonzesBtn">Kölcsönzés</button> -->
     </div>
+    </div>
+
+    
 
   
 

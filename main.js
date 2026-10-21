@@ -28,7 +28,7 @@ const konyv = [konyv1,konyv2,konyv3]
 
 
 function tablazatfeltoltese(){
-    document.getElementById("tablazat").innerHTML= konyv.map((konyv)=>{
+    document.getElementById("tablazat").innerHTML= konyv.map((konyv, index)=>{
             
             
           return  `
@@ -37,12 +37,15 @@ function tablazatfeltoltese(){
                         <td class="szerzoKi">${konyv.Szerzo}</td>
                         <td class="kiadasKi">${konyv.Kiadas}</td>
                         <td class="oldalKi">${konyv.Oldalszam}</td>
-                        <td class="kolcsonzesBtn">
+                        <td class="kolcsonzesBtn" data-index="${index}">
                             <button>Kölcsönzés</button>
+                        </td>
+                        <td class="visszahozasBtn" data-index="${index}">
+                            <button>Visszahozás</button>
                         </td>
             </tr>
             ` 
-            });
+            }).join("");
 
 }
 
@@ -76,6 +79,113 @@ document.getElementById("KonyvHozzaadasa").addEventListener('click', function(){
 
 
 
-document.getElementById("kolcsonzesBtn").addEventListener('click', function(){
-    // let aktualis_constructor = 
+document.getElementById("tablazat").addEventListener("click", function(event){
+     let gomb = event.target.closest(".kolcsonzesBtn")
+       let index = Number(gomb.dataset.index)
+       let kivalasztott = konyv[index];
+
+        if(kivalasztott.kolcsonozve===false){
+            kivalasztott.kolcsonoz()
+            console.log(kivalasztott)
+            alert("Kölcsönözve")     
+        }
+        else{
+            alert("Nem lehet kölcsönözni")
+        }
+})
+        
+
+       
+            
+        
+        
+
+
+
+document.getElementById("tablazat").addEventListener("click", function(event){
+    let gomb = event.target.closest(".visszahozasBtn")
+       let index = Number(gomb.dataset.index)
+       let kivalasztott = konyv[index];
+
+     
+       if(kivalasztott.kolcsonozve===true){
+            kivalasztott.visszahoz()
+            alert("Visszhozva")     
+        }
+        else{
+            alert("Nem lehet visszahozni")
+        }
+})
+        
+
+
+
+
+
+
+
+
+
+
+
+document.getElementById("szuresGomb").addEventListener("click", function(){
+
+
+    document.getElementById("tablazat").innerHTML= konyv.map((konyv)=>{
+            
+          if(konyv.kolcsonozve===false){
+            return  `
+            <tr>
+                        <td class="cimKi">${konyv.Cim}</td>
+                        <td class="szerzoKi">${konyv.Szerzo}</td>
+                        <td class="kiadasKi">${konyv.Kiadas}</td>
+                        <td class="oldalKi">${konyv.Oldalszam}</td>
+                        <td class="kolcsonzesBtn">
+                            <button>Kölcsönzés</button>
+                        </td>
+                        <td class="visszahozasBtn" >
+                            <button>Visszahozás</button>
+                        </td>
+            </tr>
+            ` 
+          }  
+          
+            });
+})
+
+
+
+document.getElementById("legregebbi").addEventListener("click", function(){
+    for(let i=0;i<konyv.length;i++){
+        
+        if(konyv[i+1].Kiadas>konyv[i].Kiadas){
+            console.log(konyv[i].Cim)
+        }
+    }
+})
+
+
+
+
+
+document.getElementById("legvastagabb").addEventListener("click", function(){
+    for(let i=0;i<konyv.length;i++){
+        
+        if(konyv[i+1].Oldalszam<konyv[i].Oldalszam){
+            console.log(konyv[i].Cim)
+        }
+    }
+})
+
+
+
+document.getElementById("atlag").addEventListener("click", function(){
+    let atlag=0;
+    let osszeg=0;
+
+    for(let i=0;i<konyv.length;i++){
+        osszeg+=konyv[i].Oldalszam
+        atlag=osszeg/konyv.length
+    }
+    console.log(Math.round(atlag,2))
 })
