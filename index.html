@@ -5,26 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Könyvtár</title>
     <link rel="stylesheet" href="main.css">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
     <div class="container">
-        <div>
-        <h2>Könyv hozzáadása</h2>
+        <div class="d-flex flex-column gap-2 m-3">
+        
         <input id="konyvCime" placeholder="Cím">
         <input id="konyvSzerzoje" placeholder="Szerző">
         <input id="kiadasi_ev" placeholder="Kiadási év">
         <input id="oldalszam" placeholder="Oldalszám">
-        <button id="KonyvHozzaadasa">Könyv Hozzáadása</button>
+        <button id="KonyvHozzaadasa" class="btn btn-primary">Könyv Hozzáadása</button>
         
     </div>
     <div>
-        <button id="szuresGomb">Szűrés</button>
-        <button id="legregebbi">Legrégebbi könyv</button>
-        <button id="legvastagabb">Legvastagabb könyv</button>
-        <button id="atlag">Átlagos oldalszám</button>
+        <button id="szuresGomb" class="btn btn-primary">Szűrés</button>
+        <button id="legregebbi" class="btn btn-primary">Legrégebbi könyv</button>
+        <button id="legvastagabb" class="btn btn-primary">Legvastagabb könyv</button>
+        <button id="atlag" class="btn btn-primary">Átlagos oldalszám</button>
+
+        <div class="d-flex flex-column gap-3">
+            <p id="legregebbiKi">Legrégebbi könyv: </p>
+        <p id="legvastagabbKi">Legvastagabb könyv: </p>
+        <p id="atlagKi">Átlagos oldalszám: </p>
+        </div>
+        
     </div>
     <div>
-        <table id="table">
+        <table class="table table-striped">
             
             <thead>
                <td>Cím</td>

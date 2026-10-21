@@ -150,18 +150,23 @@ document.getElementById("szuresGomb").addEventListener("click", function(){
             ` 
           }  
           
-            });
+            }).join("");
 })
 
 
 
 document.getElementById("legregebbi").addEventListener("click", function(){
+    let a =0;
     for(let i=0;i<konyv.length;i++){
         
-        if(konyv[i+1].Kiadas>konyv[i].Kiadas){
-            console.log(konyv[i].Cim)
-        }
+        konyv.forEach(konyv => {
+            a = Math.min(konyv.Kiadas)
+            
+            
+        });
+        
     }
+    document.getElementById("legregebbiKi").innerHTML+=a
 })
 
 
@@ -169,12 +174,15 @@ document.getElementById("legregebbi").addEventListener("click", function(){
 
 
 document.getElementById("legvastagabb").addEventListener("click", function(){
+    let a = 0;
     for(let i=0;i<konyv.length;i++){
         
-        if(konyv[i+1].Oldalszam<konyv[i].Oldalszam){
-            console.log(konyv[i].Cim)
-        }
+        konyv.forEach(konyv=>{
+            a = Math.min(konyv.Oldalszam)
+        })
+        
     }
+    document.getElementById("legvastagabbKi").innerHTML+=a
 })
 
 
@@ -187,5 +195,5 @@ document.getElementById("atlag").addEventListener("click", function(){
         osszeg+=konyv[i].Oldalszam
         atlag=osszeg/konyv.length
     }
-    console.log(Math.round(atlag,2))
+    document.getElementById("atlagKi").innerHTML+=Math.round(atlag,2)
 })
