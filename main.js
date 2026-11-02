@@ -176,7 +176,8 @@ document.getElementById("szuresGomb").addEventListener("click", function(){
 
 
 document.getElementById("legregebbi").addEventListener("click", function(){
-  
+    document.getElementById("legvastagabbKi").innerText=""
+    document.getElementById("atlagKi").innerText=""
      document.getElementById("legregebbiKi").innerText="Legrégebbi könyv: "
     const a = Math.min(...konyv.map(k=>k.Kiadas))
     konyv.forEach(konyv => {
@@ -194,7 +195,8 @@ document.getElementById("legregebbi").addEventListener("click", function(){
 document.getElementById("legvastagabb").addEventListener("click", function(){
     
     document.getElementById("legvastagabbKi").innerText="Legvastagabb könyv: "
-        
+        document.getElementById("atlagKi").innerText=""
+        document.getElementById("legregebbiKi").innerText=""
     const a = Math.max(...konyv.map(k => k.Oldalszam));
       konyv.forEach(konyv => {
         if(a==konyv.Oldalszam){
@@ -210,6 +212,8 @@ document.getElementById("legvastagabb").addEventListener("click", function(){
 document.getElementById("atlag").addEventListener("click", function(){    let atlag=0;
     let osszeg=0;
     document.getElementById("atlagKi").innerText="Átlagos oldalszám: "
+    document.getElementById("legregebbiKi").innerText=""
+    document.getElementById("legvastagabbKi").innerText=""
     konyv.map(k => {osszeg+=Number(k.Oldalszam)});
     console.log(Number(osszeg))
 
