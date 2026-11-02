@@ -1,9 +1,10 @@
 
-function Konyvek(cim,szerzo,kiadasi_ev,oldalszam){
+function Konyvek(cim,szerzo,kiadasi_ev,oldalszam,kategoria){
     this.Cim=cim;
     this.Szerzo=szerzo;
     this.Kiadas=kiadasi_ev;
     this.Oldalszam=oldalszam;
+    this.Kategoria=kategoria;
     this.kolcsonozve=false
     this.kolcsonoz = function(){
         this.kolcsonozve=true
@@ -14,11 +15,11 @@ function Konyvek(cim,szerzo,kiadasi_ev,oldalszam){
 
 }
 
-const konyv1 = new Konyvek("A Gyűrűk ura", "J.R.R. Tolkien", 1952,600)
-const konyv2 = new Konyvek("Sherlock Holmes", "Arthur Conan Doyle", 1889,300)
-const konyv3 = new Konyvek("Az éjszakai szolgálat", "John La Carré", 1998,400)
-const konyv4 = new Konyvek("A Hobbit", "J.R.R. Tolkien", 1930,350)
-const konyv5 = new Konyvek("Az Aranyember", "Jókai Mór", 1878,700)
+const konyv1 = new Konyvek("A Gyűrűk ura", "J.R.R. Tolkien", 1952,600,"Fantasy")
+const konyv2 = new Konyvek("Sherlock Holmes", "Arthur Conan Doyle", 1889,300,"Fantasy")
+const konyv3 = new Konyvek("Az éjszakai szolgálat", "John La Carré", 1998,400,"Dráma")
+const konyv4 = new Konyvek("A Hobbit", "J.R.R. Tolkien", 1930,350,"Fantasy")
+const konyv5 = new Konyvek("Az Aranyember", "Jókai Mór", 1878,700,"Dráma")
 
 
 
@@ -40,6 +41,7 @@ function tablazatfeltoltese(){
                         <td class="szerzoKi">${konyv.Szerzo}</td>
                         <td class="kiadasKi">${konyv.Kiadas}</td>
                         <td class="oldalKi">${konyv.Oldalszam}</td>
+                        <td class="oldalKi">${konyv.Kategoria}</td>
                         <td class="kolcsonzesBtn " data-index="${index}">
                             <button class="btn btn-primary">Kölcsönzés</button>
                         </td>
@@ -63,12 +65,13 @@ document.getElementById("KonyvHozzaadasa").addEventListener('click', function(){
     let szerzo = document.getElementById("konyvSzerzoje").value
     let kiadas = document.getElementById("kiadasi_ev").value
     let oldalszam = document.getElementById("oldalszam").value
+    let kategoria = document.getElementById("kategoria").value
 
     
 
 
 
-    const ujadat = new Konyvek(cim,szerzo,kiadas,oldalszam)
+    const ujadat = new Konyvek(cim,szerzo,kiadas,oldalszam,kategoria)
 
     konyv.push(ujadat)
     tablazatfeltoltese()
@@ -78,6 +81,7 @@ document.getElementById("KonyvHozzaadasa").addEventListener('click', function(){
     document.getElementById("konyvSzerzoje").value=""
     document.getElementById("kiadasi_ev").value=""
     document.getElementById("oldalszam").value=""
+    document.getElementById("kategoria").value=""
 })
 
 
@@ -152,6 +156,7 @@ document.getElementById("szuresGomb").addEventListener("click", function(){
                         <td class="szerzoKi">${konyv.Szerzo}</td>
                         <td class="kiadasKi">${konyv.Kiadas}</td>
                         <td class="oldalKi">${konyv.Oldalszam}</td>
+                        <td class="oldalKi">${konyv.Kategoria}</td>
                         <td class="kolcsonzesBtn">
                             <button class="btn btn-primary">Kölcsönzés</button>
                         </td>
@@ -202,8 +207,7 @@ document.getElementById("legvastagabb").addEventListener("click", function(){
 
 
 
-document.getElementById("atlag").addEventListener("click", function(){
-    let atlag=0;
+document.getElementById("atlag").addEventListener("click", function(){    let atlag=0;
     let osszeg=0;
     document.getElementById("atlagKi").innerText="Átlagos oldalszám: "
     konyv.map(k => {osszeg+=Number(k.Oldalszam)});
@@ -214,3 +218,38 @@ document.getElementById("atlag").addEventListener("click", function(){
     document.getElementById("atlagKi").innerHTML+=Math.round(atlag,2)
     
 })
+
+
+
+
+document.getElementById("szuresGomb2").addEventListener("click" ,function(){
+    let ertek = document.getElementById("categ").value
+  
+    
+    document.getElementById("tablazat").innerHTML= konyv.map((konyv)=>{
+            
+          if(konyv.Kategoria==ertek){
+            return  `
+            <tr>
+                        <td class="cimKi">${konyv.Cim}</td>
+                        <td class="szerzoKi">${konyv.Szerzo}</td>
+                        <td class="kiadasKi">${konyv.Kiadas}</td>
+                        <td class="oldalKi">${konyv.Oldalszam}</td>
+                        <td class="oldalKi">${konyv.Kategoria}</td>
+                        <td class="kolcsonzesBtn">
+                            <button class="btn btn-primary">Kölcsönzés</button>
+                        </td>
+                        <td class="visszahozasBtn" >
+                            <button class="btn btn-warning">Visszahozás</button>
+                        </td>
+            </tr>
+            ` 
+          } 
+          else{
+            tablazatfeltoltese()
+          }
+          
+            }).join("");
+
+})
+    

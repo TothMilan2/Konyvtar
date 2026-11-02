@@ -15,15 +15,30 @@
         <input id="konyvSzerzoje" placeholder="Szerző">
         <input id="kiadasi_ev" placeholder="Kiadási év">
         <input id="oldalszam" placeholder="Oldalszám">
+        <input id="kategoria" placeholder="Kategória">
         <button id="KonyvHozzaadasa" class="btn btn-primary">Könyv Hozzáadása</button>
         
     </div>
-    <div>
-        <button id="szuresGomb" class="btn btn-primary">Szűrés</button>
-        <button id="legregebbi" class="btn btn-primary">Legrégebbi könyv</button>
-        <button id="legvastagabb" class="btn btn-primary">Legvastagabb könyv</button>
-        <button id="atlag" class="btn btn-primary">Átlagos oldalszám</button>
-
+    <div class="d-flex flex-column gap-2 m-3">
+        <div>
+            <button id="szuresGomb" class="btn btn-primary">Szűrés</button>
+            <button id="legregebbi" class="btn btn-primary">Legrégebbi könyv</button>
+            <button id="legvastagabb" class="btn btn-primary">Legvastagabb könyv</button>
+            <button id="atlag" class="btn btn-primary">Átlagos oldalszám</button>
+        </div>
+        
+        <form action="/action_page.php">
+            <label for="cars">Válassz kategóriát</label>
+            <select name="category" id="categ" class="form-select">
+                <option value="Fantasy" name="Fantasy">Fantasy</option>
+                <option value="Sci-fi" name="Sci-fi">Sci-fi</option>
+                <option value="Vígjáték" name="Vígjáték">Vígjáték</option>
+                <option value="Dráma" name="Dráma">Dráma</option>
+            </select>
+            <br><br>
+            
+        </form>
+        <button  id="szuresGomb2" class="btn btn-primary">Szűrés</button>
         <div class="d-flex flex-column gap-3">
             <p id="legregebbiKi"></p>
         <p id="legvastagabbKi"> </p>
